@@ -99,7 +99,7 @@ public class SBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<T>(verdi,null,null,p);                   // oppretter en ny node
+        p = new Node<T>(verdi,null,null,p);                   // oppretter en ny node, med v og h lik null
 
         if (q == null) rot = p;                  // p blir rotnode
         else if (cmp < 0) q.venstre = p;         // venstre barn til q
@@ -121,7 +121,28 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        Node<T> rotNode = rot; //oppretter rot node
+        int antall = 0;
+
+        while (rotNode != null) { //når p ikke er null
+            int cmp = comp.compare(verdi, rotNode.verdi); //vi sammenligner verdien vi vil finne med verdiene som allerede
+                                                     //finnes i treet
+
+            if (cmp < 0) rotNode = rotNode.venstre; //hvis den du sammenligner er mindre enn 0, går vi til den venstre i treet
+            else if (cmp > 0) rotNode = rotNode.høyre; //hvis den du sammenligner er større enn  0, går vi til den høyre i treet
+            else {
+                rotNode=rotNode.høyre; //kunne hatt cmp>=0 over men valgte heller å bruke en ekstra linje med rotNode=rotNode.høyre; , her har vi
+                                         //med tilfelle at hvis den vi sammenligner er LIK rotNoden, er jo en else så da er svaret ja og vi går til høyre!!
+                                        // husk man spør alltid er tallet LIK eller STØRRE
+
+                antall++; //så øker vi antallet om det finnes flere like verdier
+            }
+        }
+
+        return antall; //returnerer antallet
+
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public void nullstill() {
@@ -156,5 +177,16 @@ public class SBinTre<T> {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    public static void main(String[] args) {
+        Integer[] a = {4,7,2,9,4,10,8,7,4,6};
+        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) { tre.leggInn(verdi); }
+
+        System.out.println(tre.antall());      // Utskrift: 10
+        System.out.println(tre.antall(5));     // Utskrift: 0
+        System.out.println(tre.antall(4));     // Utskrift: 3
+        System.out.println(tre.antall(7));     // Utskrift: 2
+        System.out.println(tre.antall(10));    // Utskrift: 1
+    }
 
 } // ObligSBinTre
