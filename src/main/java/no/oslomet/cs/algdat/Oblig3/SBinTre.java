@@ -121,23 +121,18 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-
         Node<T> rotNode = rot; //oppretter rot node
         int antall = 0;
 
+        if (verdi==null)return 0;
+
         while (rotNode != null) { //når p ikke er null
-            int cmp = comp.compare(verdi, rotNode.verdi); //vi sammenligner verdien vi vil finne med verdiene som allerede
-                                                     //finnes i treet
 
+            int cmp = comp.compare(verdi, rotNode.verdi); //vi sammenligner verdien vi vil finne med verdiene som allerede finnes i treet
+            if (verdi==rotNode.verdi)antall++; //om funnet øker vi antallet
             if (cmp < 0) rotNode = rotNode.venstre; //hvis den du sammenligner er mindre enn 0, går vi til den venstre i treet
-            else if (cmp > 0) rotNode = rotNode.høyre; //hvis den du sammenligner er større enn  0, går vi til den høyre i treet
-            else {
-                rotNode=rotNode.høyre; //kunne hatt cmp>=0 over men valgte heller å bruke en ekstra linje med rotNode=rotNode.høyre; , her har vi
-                                         //med tilfelle at hvis den vi sammenligner er LIK rotNoden, er jo en else så da er svaret ja og vi går til høyre!!
-                                        // husk man spør alltid er tallet LIK eller STØRRE
+            else if (cmp >= 0) rotNode = rotNode.høyre; //hvis den du sammenligner er større eller LIK enn  0, går vi til den høyre i treet
 
-                antall++; //så øker vi antallet om det finnes flere like verdier
-            }
         }
 
         return antall; //returnerer antallet
@@ -150,7 +145,8 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+       throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
