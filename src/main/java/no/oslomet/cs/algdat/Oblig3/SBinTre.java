@@ -181,7 +181,7 @@ public class SBinTre<T> {
         while (p != null){ // så lenge p ikke er null
 
             oppgave.utførOppgave((p.verdi)); //lagrer verdien
-            p=nestePostorden(p.høyre); //så går vi til neste node i postorden rekkefølge
+            p=nestePostorden(p); //så går vi til neste node i postorden rekkefølge
         }
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
