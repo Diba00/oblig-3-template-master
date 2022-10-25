@@ -11,8 +11,8 @@ I oppgave 1 så gikk jeg frem ved å kopiere koden fra kompendiet, 5.2.3a.
 Koden 'p = new Node<>(verdi);' var det eneste jeg gjorde om på. Og dette gjorde jeg fordi 
 i konstruktøren så jeg at det er 4 parametere: verdi, node v, node h, forelder. Jeg satt da inn 'verdi,null,null,q'.
 Verdi var satt inn fra før, så skrev jeg inn null, null fordi når vi skal legge inn en ny node så har jo ikke den noden 
-noen kobling til venstre eller høyre barn/node i treet fra før. Skrev så inn 'q' som forelder slik at vi vet hvor noden skal
-settes inn/til hvilken forelder den tilhører.
+noen venstre barn eller høyre barn fra før, er alltid bladnode når vi legger inn. Skrev så inn 'q' som forelder slik 
+at vi vet hvor noden skal settes inn/til hvilken forelder den tilhører.
 
 I oppgave 2 så gikk jeg frem med å først opprette en rot node deretter skrive at antallet er 0 til å begynne med.
 Skrev så en if setning hvor jeg sier hvis verdien jeg skriver inn og leter etter er null så returnerer vi 0.
