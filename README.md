@@ -5,7 +5,7 @@ Oppgaven er levert av følgende student:
 * Diba Shishegar, S358980, s358980@oslomet.no
 
 
-# Oppgavebeskrivelse
+# Oppgavebeskrivelse 
 
 I oppgave 1 så gikk jeg frem ved å kopiere koden fra kompendiet, 5.2.3a. 
 Koden 'p = new Node<>(verdi);' var det eneste jeg gjorde om på. Og dette gjorde jeg fordi 
