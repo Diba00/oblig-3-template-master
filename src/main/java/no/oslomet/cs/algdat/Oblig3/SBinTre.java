@@ -193,12 +193,15 @@ public class SBinTre<T> {
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
 
-        if (p.høyre!=null){
-            postordenRecursive(p.høyre,oppgave);
+        if (p.høyre!=null){ //sjekker om høyre ikke er null
+            postordenRecursive(p.høyre,oppgave); //hvis den ikke er null kan vi gå videre og kalle på metoden
         }
 
-        if (p.venstre!= null){
-            postordenRecursive(p.venstre,oppgave);
+        if (p.venstre!= null) { //sjekker om venstre ikke er null
+            postordenRecursive(p.venstre, oppgave); //hvis den ikke er null kan vi gå videre og kalle på metoden
+        }
+
+        oppgave.utførOppgave(p.verdi); //om alt funker, ingen nullverdier og metoden er blitt kalt på lagrer vi så verdien p.verdi i oppgave
 
 
 
