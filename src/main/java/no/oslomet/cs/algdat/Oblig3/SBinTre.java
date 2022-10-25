@@ -1,10 +1,7 @@
 package no.oslomet.cs.algdat.Oblig3;
 
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class SBinTre<T> {
     private static final class Node<T>   // en indre nodeklasse
@@ -85,6 +82,8 @@ public class SBinTre<T> {
 
     public boolean leggInn(T verdi) {
 
+        //kopiert fra kompendiet la til 'p = new Node<T>(verdi,null,null,p);'
+
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
         Node<T> p = rot, q = null;               // p starter i roten
@@ -99,6 +98,7 @@ public class SBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
+        //la til verdi,null,null,p fordi i konstuktøren har vi 4 parametere så fylte bare inn
         p = new Node<T>(verdi,null,null,p);                   // oppretter en ny node, med v og h lik null
 
         if (q == null) rot = p;                  // p blir rotnode
@@ -145,11 +145,21 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
+        //inspirasjon fra 5.1.7 i kompendiet!
 
-       throw new UnsupportedOperationException("Ikke kodet ennå!");
+       Objects.requireNonNull(p);// sjekker om det ikke er en null verdi, den fra kompendiet funket ikke
+
+        while (true)
+        {
+            if (p.venstre != null) p = p.venstre;
+            else if (p.høyre != null) p = p.høyre;
+            else return p;
+        }
+       //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
@@ -171,18 +181,6 @@ public class SBinTre<T> {
 
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
-
-    public static void main(String[] args) {
-        Integer[] a = {4,7,2,9,4,10,8,7,4,6};
-        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
-        for (int verdi : a) { tre.leggInn(verdi); }
-
-        System.out.println(tre.antall());      // Utskrift: 10
-        System.out.println(tre.antall(5));     // Utskrift: 0
-        System.out.println(tre.antall(4));     // Utskrift: 3
-        System.out.println(tre.antall(7));     // Utskrift: 2
-        System.out.println(tre.antall(10));    // Utskrift: 1
     }
 
 } // ObligSBinTre
