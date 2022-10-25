@@ -99,7 +99,7 @@ public class SBinTre<T> {
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
         //la til verdi,null,null,p fordi i konstuktøren har vi 4 parametere så fylte bare inn
-        p = new Node<T>(verdi,null,null,p);                   // oppretter en ny node, med v og h lik null
+        p = new Node<T>(verdi,null,null,q);                   // oppretter en ny node, med v og h lik null
 
         if (q == null) rot = p;                  // p blir rotnode
         else if (cmp < 0) q.venstre = p;         // venstre barn til q
@@ -145,9 +145,7 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        //inspirasjon fra 5.1.7 i kompendiet!
-
-       Objects.requireNonNull(p);// sjekker om det ikke er en null verdi, den fra kompendiet funket ikke
+        //inspirasjon fra 5.1.7 i kompendiet! kode 5.1.7 h)
 
         while (true)
         {
@@ -159,12 +157,34 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
+        Node<T> f = p.forelder;
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if(f == null)
+            return null; //hvis p ikke har en forelder (p er rotnoden) er neste null
+
+        if(p == f.høyre)//Hvis p er høyre barn til sin forelder f, er forelderen f den neste.
+            return f;
+
+        if(p == f.venstre && f.høyre == null) //Hvis p er venstre barn til sin forelder f, gjelder:
+                                            // Hvis p er enebarn (f.høyre er null), er forelderen f den neste.
+            return f;
+
+        return førstePostorden(f.høyre); //Hvis p ikke er enebarn (dvs. f.høyre er ikke null), så er den neste den noden
+                                         // som kommer først i postorden i subtreet med f.høyre som rot.
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        Node<T> p = førstePostorden(rot); //Første noden i postorden rekkefølge
+
+        while (p != null){ // så lenge p ikke er null
+
+            oppgave.utførOppgave((p.verdi)); //lagrer verdien
+            p=nestePostorden(p.høyre); //så går vi til neste node i postorden rekkefølge
+        }
+
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) {
@@ -172,7 +192,8 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+       // throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public ArrayList<T> serialize() {
