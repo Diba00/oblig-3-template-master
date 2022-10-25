@@ -180,7 +180,7 @@ public class SBinTre<T> {
 
         while (p != null){ // så lenge p ikke er null
 
-            oppgave.utførOppgave((p.verdi)); //lagrer verdien
+            oppgave.utførOppgave((p.verdi)); //skriver ut verdien, bruker det som soutpl
             p=nestePostorden(p); //så går vi til neste node i postorden rekkefølge
         }
 
@@ -201,7 +201,7 @@ public class SBinTre<T> {
             postordenRecursive(p.høyre, oppgave); //hvis den ikke er null kan vi gå videre og kalle på metoden
         }
 
-        oppgave.utførOppgave(p.verdi); //om alt funker, ingen nullverdier og metoden er blitt kalt på lagrer vi så verdien p.verdi i oppgave
+        oppgave.utførOppgave(p.verdi); //om alt funker, ingen nullverdier og metoden er blitt kalt på skriver vi ut verdien
 
 
 
